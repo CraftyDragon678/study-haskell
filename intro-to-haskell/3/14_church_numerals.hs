@@ -80,3 +80,8 @@ id = \x -> x
 compose :: [a -> a] -> (a -> a)
 compose = foldr (.) id
 
+-- 함수의 합성
+compose [(+1), (*4)] 0  -- 1
+compose [(+1), (*4)] 5  -- 21
+compose [(*4), (+1)] 0  -- 4
+
