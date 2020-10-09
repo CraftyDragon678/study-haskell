@@ -33,5 +33,5 @@ item = \xs -> case xs of
  (x:xs) -> [(x, xs)]
 
 ignore2 :: Parser (Char, Char)
-ignore2 = item >>== \x -> item >>== \y -> item >>== \z -> return (x, z)
+ignore2 = item >>== \x -> item >>== \_ -> item >>== \z -> returnC (x, z)
 
