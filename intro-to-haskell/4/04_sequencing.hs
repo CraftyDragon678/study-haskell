@@ -15,8 +15,10 @@ type Parser a = String -> [(a, String)]
 -- 모나드의 bind(>>=)를 정의함
 (>>==) :: Parser a -> (a -> Parser b) -> Parser b
 p >>== q = \xs -> case p xs of
-  [] -> []
-  [(y, ys)] -> (q y) ys
+  [] -> []                       -- p가 실패하면 아무것도 안 함
+  [(y, ys)] -> (q y) ys          -- p가 성공하면 그 y를 q에 다시 넘겨서 파서 b를 만들고, 거기에 남은 문자열을 넘겨줌
+
+-- 실제로 bind의 타입은 `Monad m => m a -> (a -> m b) -> m b` 이다.
 
 
 returnC :: a -> Parser a
