@@ -45,5 +45,3 @@ mlabel (Node l r) = do l' <- mlabel l
 
 label :: Tree a -> Tree (a, Int)
 label t = fst (apply (mlabel t) 0)
-
--- 안 되네
