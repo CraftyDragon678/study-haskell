@@ -1,3 +1,5 @@
+import GHC.Base (ap, liftM)
+
 -- 한 상태에서 다른 상태로 변환시켜주는 state transformer
 -- parser
 type State = Int
@@ -7,8 +9,11 @@ newtype ST a = S (State -> (a, State))
 apply :: ST a -> State -> (a, State)
 apply (S f) x = f x
 
-instance Functor ST
-instance Applicative ST
+instance Functor ST where
+  fmap = liftM
+instance Applicative ST where
+  pure = return
+  (<*>) = ap
 instance Monad ST where
   return x = S $ \s -> (x, s)
   -- (>>=) :: ST a -> (a -> ST b) -> ST b
@@ -20,6 +25,9 @@ instance Monad ST where
 -- >>= 는 모나드(연산)간 연결
 
 data Tree a = Leaf a | Node (Tree a) (Tree a)
+instance (Show t) => Show (Tree t) where
+  show (Leaf a) = show a
+  show (Node l r) = "Node (" ++ show l ++ ", " ++ show r ++ ")"
 
 tree :: Tree Char
 tree = Node (Node (Leaf 'a') (Leaf 'b')) (Leaf 'c')
