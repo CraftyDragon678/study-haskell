@@ -25,9 +25,10 @@ instance Monad ST where
 -- >>= 는 모나드(연산)간 연결
 
 data Tree a = Leaf a | Node (Tree a) (Tree a)
-instance (Show t) => Show (Tree t) where
-  show (Leaf a) = show a
-  show (Node l r) = "Node (" ++ show l ++ ", " ++ show r ++ ")"
+  deriving (Show)
+-- instance (Show t) => Show (Tree t) where
+--   show (Leaf a) = show a
+--   show (Node l r) = "Node (" ++ show l ++ ", " ++ show r ++ ")"
 
 tree :: Tree Char
 tree = Node (Node (Leaf 'a') (Leaf 'b')) (Leaf 'c')
