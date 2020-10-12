@@ -43,3 +43,7 @@ prop xs = rmdup xs == xs ==> sort xs === xs'
     rmdup [] = []
     rmdup [x] = [x]
     rmdup (x:xs) = x : filter (/=x) (rmdup xs)
+
+-- quickCheck prop
+-- quickCheck (verbose prop)
+-- quickCheck (withMaxSuccess 1000 prop)
