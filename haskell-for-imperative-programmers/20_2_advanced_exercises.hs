@@ -11,16 +11,16 @@ main = do
   findStrings xs file
 
 getWords :: IO [String]
-getWords = getWord (return [])
+getWords = getWord
   where
-    getWord :: IO [String] -> IO [String]
-    getWord xs = do
+    getWord :: IO [String]
+    getWord = do
       putStr "> "
       x <- getLine
-      if x == "" then xs
-        else do
-          xs' <- xs
-          getWord $ return $ xs' ++ [x]
+      if x == "" then return []
+      else do
+        xs <- getWord
+        return $ x:xs
 
 findStrings :: [String] -> String -> IO ()
 findStrings [] _ = return ()
