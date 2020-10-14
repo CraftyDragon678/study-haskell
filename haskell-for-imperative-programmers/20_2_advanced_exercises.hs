@@ -7,7 +7,6 @@ main = do
   putStr "File to search: "
   filePath <- getLine
   file <- readFile filePath
-  -- putStrLn $ unlines xs
   findStrings xs file
 
 getWords :: IO [String]
