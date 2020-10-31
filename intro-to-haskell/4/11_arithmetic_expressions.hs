@@ -1,5 +1,11 @@
 import GHC.Base
+    ( Applicative(liftA2),
+      MonadPlus(..),
+      Alternative(many, (<|>), empty),
+      ap,
+      liftM )
 import Data.Char
+    ( isAlphaNum, isDigit, isAlpha, isLower, isSpace, isUpper )
 
 newtype Parser a = P (String -> [(a, String)])
 
